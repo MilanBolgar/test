@@ -1,0 +1,1850 @@
+
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#ffb6cf">
+<title>Neked, Szerelmem ♡</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Pacifico&display=swap');
+
+:root {
+  --pink: #ff8fb5;
+  --dark-pink: #e85d91;
+  --light: #fff4f8;
+  --text: #75465b;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: 'Nunito', sans-serif;
+  color: var(--text);
+  background: linear-gradient(145deg, #fff5f8, #ffe0ec, #fff0f6);
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition: background .8s ease, color .5s ease;
+}
+
+.scroll-progress { position: fixed; top: 0; left: 0; width: 0; height: 4px; z-index: 20; background: linear-gradient(90deg, #ff8fb5, #e85d91, #b93675); box-shadow: 0 0 12px #e85d91aa; transition: width .1s linear; }
+
+button { font: inherit; }
+
+.hearts-bg {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.floating-heart {
+  position: absolute;
+  bottom: -50px;
+  opacity: 0;
+  animation: floatUp linear forwards;
+  filter: drop-shadow(0 2px 5px #ff9dbc44);
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(0) rotate(0); opacity: 0; }
+  15% { opacity: .75; }
+  85% { opacity: .7; }
+  100% { transform: translateY(-115vh) rotate(35deg); opacity: 0; }
+}
+
+main {
+  position: relative;
+  z-index: 1;
+  width: min(100% - 28px, 760px);
+  margin: auto;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 2px;
+}
+
+.logo {
+  font-family: 'Pacifico', cursive;
+  color: var(--dark-pink);
+  font-size: 21px;
+}
+
+.music-btn {
+  border: 1px solid #ffc0d5;
+  border-radius: 30px;
+  background: #ffffffb9;
+  padding: 10px 14px;
+  color: var(--text);
+  cursor: pointer;
+  transition: transform .25s, box-shadow .25s, background .25s;
+}
+
+.music-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px #e85d9130; }
+
+.volume-control { position: relative; }
+.volume-toggle { display: grid; place-items: center; width: 42px; height: 42px; border: 1px solid #ffc0d5; border-radius: 50%; background: #ffffffb9; color: var(--text); cursor: pointer; font-size: 18px; transition: transform .25s, background .25s; }
+.volume-toggle:hover, .volume-control.open .volume-toggle { transform: scale(1.08); background: #fff; }
+.volume-popover { position: absolute; top: calc(100% + 10px); right: 0; z-index: 5; display: none; width: 184px; padding: 13px; border: 1px solid #ffc0d5; border-radius: 16px; background: #fffffff2; box-shadow: 0 12px 28px #d96d9340; backdrop-filter: blur(12px); }
+.volume-control.open .volume-popover { display: grid; gap: 8px; animation: reveal .25s ease both; }
+.volume-popover span:first-child { color: var(--dark-pink); font-size: 12px; font-weight: 800; }
+.volume-popover input { width: 100%; accent-color: var(--dark-pink); cursor: pointer; }
+.volume-value { display: block; color: var(--text); font-size: 12px; text-align: right; }
+
+.nav-actions { display: flex; gap: 8px; align-items: center; }
+
+.icon-btn {
+  border: 1px solid #ffc0d5;
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  background: #ffffffb9;
+  cursor: pointer;
+  font-size: 18px;
+  transition: transform .25s, background .25s;
+}
+
+.icon-btn:hover { transform: rotate(12deg) scale(1.08); background: #fff; }
+
+.hero {
+  text-align: center;
+  padding: 55px 12px 48px;
+}
+
+.eyebrow {
+  display: inline-block;
+  background: #ffffffa6;
+  border: 1px solid #ffd0df;
+  border-radius: 30px;
+  padding: 8px 16px;
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+
+.hero h1 {
+  font-family: 'Pacifico', cursive;
+  font-size: clamp(43px, 10vw, 76px);
+  line-height: 1.25;
+  font-weight: 400;
+  color: var(--dark-pink);
+  margin: 22px 0 14px;
+  text-shadow: 0 5px 25px #ff9fbe38;
+}
+
+.hero p {
+  max-width: 490px;
+  margin: 0 auto;
+  font-size: 17px;
+  line-height: 1.8;
+}
+
+.hero-actions { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
+
+.pulse-line {
+  width: min(270px, 80%);
+  height: 3px;
+  margin: 25px auto 0;
+  background: linear-gradient(90deg, transparent, #ff8fb5, transparent);
+  animation: shimmer 2.2s ease-in-out infinite;
+}
+
+@keyframes shimmer { 50% { opacity: .35; transform: scaleX(.65); } }
+
+.big-heart {
+  display: inline-block;
+  font-size: 67px;
+  margin-top: 20px;
+  animation: heartbeat 1.5s infinite;
+  cursor: pointer;
+  filter: drop-shadow(0 8px 15px #ff8fb566);
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  15% { transform: scale(1.16); }
+  30% { transform: scale(1); }
+  45% { transform: scale(1.1); }
+}
+
+.section {
+  background: #ffffffb8;
+  border: 1px solid #ffffff;
+  border-radius: 28px;
+  padding: 28px 22px;
+  margin-bottom: 23px;
+  box-shadow: 0 12px 40px #d96d9320;
+  backdrop-filter: blur(10px);
+}
+
+.section h2 {
+  text-align: center;
+  font-size: 24px;
+  margin: 0 0 16px;
+  color: var(--dark-pink);
+}
+
+.section-intro {
+  text-align: center;
+  line-height: 1.8;
+}
+
+.counter-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-top: 23px;
+}
+
+.counter-box {
+  text-align: center;
+  padding: 17px 5px;
+  background: linear-gradient(145deg, #fff0f6, #ffe0eb);
+  border-radius: 18px;
+  border: 1px solid #ffdae7;
+  transition: transform .3s, box-shadow .3s;
+}
+
+.counter-box:hover { transform: translateY(-5px); box-shadow: 0 8px 18px #e85d9130; }
+
+.counter-number {
+  display: block;
+  font-size: clamp(22px, 5vw, 33px);
+  font-weight: 800;
+  color: #e85d91;
+}
+
+.counter-label {
+  display: block;
+  font-size: 11px;
+  margin-top: 5px;
+}
+
+.love-note {
+  text-align: center;
+  line-height: 2;
+  font-size: 16px;
+}
+
+.love-note .signature {
+  display: block;
+  margin-top: 18px;
+  color: var(--dark-pink);
+  font-family: 'Pacifico', cursive;
+  font-size: 23px;
+}
+
+.reason-list {
+  display: grid;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.reason {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 14px;
+  border-radius: 16px;
+  background: #fff1f6;
+  transition: transform .25s, background .25s;
+}
+
+.reason:hover {
+  transform: translateX(5px);
+  background: #ffe2ed;
+}
+
+.memory-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 20px; }
+
+.memory-card {
+  min-height: 135px;
+  padding: 18px 12px;
+  border-radius: 18px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  background: linear-gradient(145deg, #fff, #ffe4ef);
+  border: 1px solid #ffd2e1;
+  transform: rotate(var(--tilt));
+  transition: transform .3s, box-shadow .3s;
+}
+
+.memory-card:hover { transform: rotate(0) translateY(-7px); box-shadow: 0 12px 24px #d96d9330; }
+.memory-card strong { color: var(--dark-pink); font-size: 18px; }
+.memory-card span { font-size: 13px; line-height: 1.5; }
+
+.love-meter { margin-top: 22px; }
+.meter-track { height: 15px; border-radius: 20px; overflow: hidden; background: #ffe0eb; border: 1px solid #ffd1e0; }
+.meter-fill { height: 100%; width: 78%; border-radius: inherit; background: linear-gradient(90deg, #ff9fbe, #e85d91, #c8427c); animation: meterGlow 2.5s ease-in-out infinite alternate; }
+@keyframes meterGlow { to { filter: brightness(1.18); box-shadow: 0 0 18px #e85d91aa; } }
+.meter-label { display: flex; justify-content: space-between; font-size: 12px; margin-top: 7px; }
+
+.typewriter { min-height: 58px; margin: 18px auto 0; max-width: 540px; font-size: 18px; line-height: 1.7; color: var(--dark-pink); font-weight: 700; }
+
+.timeline { position: relative; display: grid; gap: 16px; margin-top: 22px; }
+.timeline::before { content: ""; position: absolute; left: 16px; top: 10px; bottom: 10px; width: 2px; background: linear-gradient(#ffb1ca, #e85d91, #ffb1ca); }
+.timeline-item { position: relative; display: grid; grid-template-columns: 34px 1fr; gap: 12px; align-items: start; }
+.timeline-dot { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 50%; background: #fff; border: 2px solid #ff9fbe; z-index: 1; box-shadow: 0 0 0 5px #fff5f8; }
+.timeline-card { padding: 13px 15px; background: #fff8fb; border: 1px solid #ffd9e6; border-radius: 15px; transition: transform .25s, box-shadow .25s; }
+.timeline-card:hover { transform: translateX(5px); box-shadow: 0 8px 18px #d96d9326; }
+.timeline-card strong { display: block; color: var(--dark-pink); margin-bottom: 4px; }
+.timeline-card span { font-size: 13px; line-height: 1.6; }
+
+.date-box { text-align: center; padding: 20px; border-radius: 20px; background: linear-gradient(135deg, #fff, #ffe7f0); border: 1px solid #ffd1e0; }
+.date-idea { min-height: 54px; margin: 14px auto; font-size: 18px; font-weight: 800; color: var(--dark-pink); line-height: 1.6; }
+.quote-box { position: relative; margin-top: 22px; padding: 20px 25px; text-align: center; background: #fff8fb; border-left: 4px solid var(--pink); border-radius: 4px 18px 18px 4px; }
+.quote-box::before { content: "“"; position: absolute; top: -17px; left: 10px; font-family: Georgia, serif; font-size: 60px; color: #ffb1ca; }
+.quote-box p { margin: 0; font-family: 'Pacifico', cursive; color: var(--dark-pink); line-height: 1.7; }
+.kiss-counter { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 18px; font-size: 14px; }
+.kiss-counter strong { color: var(--dark-pink); font-size: 22px; }
+.special-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 20px; }
+.special-card { padding: 19px; text-align: center; border-radius: 20px; background: linear-gradient(145deg, #fff, #ffe7f0); border: 1px solid #ffd1e0; }
+.special-card h3 { margin: 0 0 10px; color: var(--dark-pink); }
+.countdown { display: flex; justify-content: center; gap: 8px; margin: 14px 0; }
+.countdown-unit { min-width: 54px; padding: 8px 4px; border-radius: 12px; background: #fff1f6; border: 1px solid #ffd9e6; }
+.countdown-unit strong { display: block; font-size: 21px; color: var(--dark-pink); }
+.countdown-unit span { font-size: 10px; }
+.countdown-form { display: grid; gap: 8px; margin-top: 14px; }
+.countdown-form input { width: 100%; padding: 9px 10px; border: 1px solid #ffc4d8; border-radius: 11px; background: #fff; color: var(--text); font: inherit; }
+.countdown-form input:focus { outline: none; border-color: var(--dark-pink); box-shadow: 0 0 0 3px #ff9fbe33; }
+.countdown-label { min-height: 20px; color: var(--dark-pink); font-weight: 800; }
+.challenge-text { min-height: 61px; font-size: 14px; line-height: 1.6; }
+.challenge-done { opacity: .7; text-decoration: line-through; }
+.hug-btn { border: none; background: transparent; font-size: 55px; cursor: pointer; filter: drop-shadow(0 5px 10px #e85d9150); transition: transform .25s; }
+.hug-btn:hover { transform: scale(1.14) rotate(-5deg); }
+.hug-number { display: block; color: var(--dark-pink); font-size: 23px; font-weight: 800; }
+.dark-mode .special-card, .dark-mode .countdown-unit, .dark-mode .countdown-form input { background: #4a2d42; border-color: #75465b; color: var(--text); }
+.feature-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 20px; }
+.feature-card { padding: 18px; border-radius: 18px; background: #fff8fb; border: 1px solid #ffd9e6; }
+.feature-card h3 { margin: 0 0 10px; color: var(--dark-pink); font-size: 18px; }
+.mood-options { display: flex; flex-wrap: wrap; gap: 8px; }
+.mood-btn { border: 1px solid #ffc4d8; border-radius: 20px; padding: 8px 11px; background: #fff; color: var(--text); cursor: pointer; transition: transform .2s, background .2s; }
+.mood-btn:hover, .mood-btn.selected { transform: translateY(-2px); background: #ffe2ed; }
+.mood-result { min-height: 105px; margin: 12px 0 0; font-size: 13px; line-height: 1.75; }
+.mood-history { margin-top: 14px; padding-top: 12px; border-top: 1px dashed #ffb1ca; }
+.mood-history h4 { margin: 0 0 8px; color: var(--dark-pink); }
+.mood-history-list { display: grid; gap: 6px; }
+.mood-history-item { display: flex; justify-content: space-between; gap: 8px; font-size: 12px; line-height: 1.4; }
+.mood-history-item span:last-child { opacity: .7; text-align: right; }
+.clear-history { border: none; padding: 0; margin-top: 9px; background: transparent; color: var(--dark-pink); font-size: 12px; cursor: pointer; text-decoration: underline; }
+.dark-mode .mood-history { border-color: #9d607d; }
+.quiz-options { display: grid; gap: 8px; }
+.quiz-option { text-align: left; border: 1px solid #ffd1e0; border-radius: 12px; padding: 10px 12px; background: #fff; color: var(--text); cursor: pointer; transition: border-color .2s, transform .2s; }
+.quiz-option:hover { border-color: var(--dark-pink); transform: translateX(3px); }
+.quiz-result { min-height: 24px; margin: 12px 0 0; color: var(--dark-pink); font-weight: 800; }
+.note-form { display: grid; gap: 10px; margin-top: 18px; }
+.note-form textarea { width: 100%; min-height: 95px; resize: vertical; border: 1px solid #ffd1e0; border-radius: 14px; padding: 12px; font: inherit; color: var(--text); background: #fffafc; outline: none; }
+.note-form textarea:focus { border-color: var(--dark-pink); box-shadow: 0 0 0 3px #ff9fbe33; }
+.saved-note { display: none; margin-top: 14px; padding: 14px; background: #fff0f6; border-radius: 14px; line-height: 1.7; font-size: 14px; }
+.saved-note.visible { display: block; animation: reveal .4s ease both; }
+.memory-form { display: grid; gap: 10px; margin-top: 20px; padding-top: 18px; border-top: 1px dashed #ffb1ca; }
+.memory-form input, .memory-form select { width: 100%; border: 1px solid #ffd1e0; border-radius: 12px; padding: 11px 12px; font: inherit; color: var(--text); background: #fffafc; outline: none; }
+.memory-form input:focus, .memory-form select:focus { border-color: var(--dark-pink); box-shadow: 0 0 0 3px #ff9fbe33; }
+.memory-wall { display: grid; gap: 10px; margin-top: 14px; }
+.memory-entry { display: grid; grid-template-columns: 42px 1fr auto; gap: 10px; align-items: start; padding: 13px; background: #fff8fb; border: 1px solid #ffd9e6; border-radius: 15px; animation: reveal .4s ease both; }
+.memory-entry-icon { font-size: 25px; }
+.memory-entry strong { display: block; color: var(--dark-pink); margin-bottom: 4px; }
+.memory-entry p { margin: 0; font-size: 13px; line-height: 1.6; }
+.delete-memory { border: none; background: transparent; color: #c95d82; cursor: pointer; font-size: 18px; }
+.empty-wall { margin: 14px 0 0; text-align: center; font-size: 13px; opacity: .75; }
+.dark-mode .memory-form input, .dark-mode .memory-form select, .dark-mode .memory-entry { background: #4a2d42; border-color: #75465b; color: var(--text); }
+.wishlist { display: grid; gap: 10px; margin-top: 20px; }
+.wish-item { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 14px; background: #fff8fb; border: 1px solid #ffd9e6; transition: transform .2s, background .2s; }
+.wish-item:hover { transform: translateX(4px); }
+.wish-item input { width: 19px; height: 19px; accent-color: var(--dark-pink); cursor: pointer; }
+.wish-item label { cursor: pointer; flex: 1; line-height: 1.5; }
+.wish-item:has(input:checked) { background: #ffe3ed; }
+.wish-item:has(input:checked) label { text-decoration: line-through; opacity: .65; }
+.wishlist-status { text-align: center; min-height: 24px; margin: 14px 0 0; color: var(--dark-pink); font-weight: 800; }
+.reveal-on-scroll { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
+.reveal-on-scroll.visible { opacity: 1; transform: translateY(0); }
+.share-row { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
+.backup-panel { margin: 20px auto 0; padding: 16px; max-width: 560px; text-align: center; border: 1px dashed #ffb1ca; border-radius: 18px; background: #fff8fb; }
+.backup-panel h3 { margin: 0 0 7px; color: var(--dark-pink); }
+.backup-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.backup-btn { border: 1px solid #ffc4d8; border-radius: 20px; padding: 9px 13px; background: #fff; color: var(--text); cursor: pointer; transition: transform .2s, background .2s; }
+.backup-btn:hover { transform: translateY(-2px); background: #ffe2ed; }
+.game-board { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; max-width: 360px; margin: 18px auto 10px; }
+.game-card { aspect-ratio: 1; border: 1px solid #ffc4d8; border-radius: 14px; background: linear-gradient(145deg, #fff, #ffe1ec); color: transparent; cursor: pointer; font-size: 25px; transition: transform .25s, background .25s; }
+.game-card:hover { transform: translateY(-3px); }
+.game-card.revealed, .game-card.matched { color: var(--dark-pink); background: #fff8fb; }
+.game-card.matched { box-shadow: 0 0 0 2px #ff9fbe, 0 6px 14px #e85d9130; }
+.game-status { min-height: 24px; text-align: center; color: var(--dark-pink); font-weight: 800; }
+.game-reset { display: block; margin: 0 auto; border: none; background: transparent; color: var(--dark-pink); cursor: pointer; text-decoration: underline; }
+.letter-box { padding: 18px; text-align: center; border-radius: 20px; background: linear-gradient(145deg, #fff, #ffe7f0); border: 1px solid #ffd1e0; }
+.letter-text { min-height: 95px; display: grid; place-items: center; margin: 10px 0; color: var(--dark-pink); font-family: 'Pacifico', cursive; font-size: 18px; line-height: 1.7; }
+.question-card { padding: 20px; text-align: center; border-radius: 20px; background: linear-gradient(145deg, #fff, #ffe7f0); border: 1px solid #ffd1e0; }
+.question-text { min-height: 62px; display: grid; place-items: center; color: var(--dark-pink); font-size: 18px; font-weight: 800; line-height: 1.5; }
+.answer-text { min-height: 48px; margin: 12px 0; line-height: 1.6; }
+.reaction-area { position: relative; min-height: 170px; margin-top: 15px; overflow: hidden; border-radius: 18px; background: #fff1f6; border: 1px dashed #ffb1ca; }
+.reaction-heart { position: absolute; display: none; border: none; background: transparent; font-size: 42px; cursor: pointer; animation: heartbeat 1s infinite; }
+.reaction-status { min-height: 24px; text-align: center; color: var(--dark-pink); font-weight: 800; }
+.dark-mode .question-card, .dark-mode .reaction-area { background: #4a2d42; border-color: #75465b; }
+.dark-mode .game-card, .dark-mode .game-card.revealed, .dark-mode .letter-box { background: #4a2d42; border-color: #75465b; }
+.dark-mode .backup-panel, .dark-mode .backup-btn { background: #4a2d42; border-color: #75465b; color: var(--text); }
+.dark-mode .wish-item { background: #4a2d42; border-color: #75465b; }
+.dark-mode .feature-card, .dark-mode .mood-btn, .dark-mode .quiz-option, .dark-mode .note-form textarea, .dark-mode .saved-note { background: #4a2d42; border-color: #75465b; color: var(--text); }
+.dark-mode .timeline-card, .dark-mode .date-box, .dark-mode .quote-box { background: #4a2d42; border-color: #75465b; }
+.dark-mode .timeline-dot { background: #4a2d42; box-shadow: 0 0 0 5px #332333; }
+
+.dark-mode { --light: #231d29; --text: #ffe4ef; --dark-pink: #ff9fbe; background: radial-gradient(circle at top, #4a263c, #201b29 70%); }
+.dark-mode .section, .dark-mode .music-btn, .dark-mode .icon-btn { background: #3a2837d9; border-color: #70445b; }
+.dark-mode .counter-box, .dark-mode .reason, .dark-mode .memory-card, .dark-mode .surprise-content { background: #4a2d42; border-color: #75465b; }
+
+.reason span:first-child { font-size: 25px; }
+
+.surprise-wrap { text-align: center; }
+
+.gift {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: block;
+  margin: 8px auto;
+  font-size: 95px;
+  filter: drop-shadow(0 9px 9px #d66c8b30);
+  animation: giftBounce 2s ease-in-out infinite;
+  transition: transform .3s;
+}
+
+.gift:hover { transform: scale(1.1) rotate(-5deg); }
+
+@keyframes giftBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-9px); }
+}
+
+.small-hint {
+  font-size: 13px;
+  opacity: .8;
+}
+
+.surprise-content {
+  display: none;
+  margin-top: 20px;
+  padding: 20px;
+  background: #fff0f6;
+  border: 1px dashed #ff9fbe;
+  border-radius: 20px;
+  animation: reveal .6s ease both;
+  line-height: 1.9;
+}
+
+.surprise-content.open { display: block; }
+
+@keyframes reveal {
+  from { opacity: 0; transform: translateY(12px) scale(.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.action-btn {
+  border: none;
+  border-radius: 30px;
+  padding: 13px 23px;
+  background: linear-gradient(135deg, #ff8fb5, #ed6296);
+  color: white;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 6px 18px #ef82a844;
+  transition: transform .2s, box-shadow .2s;
+}
+
+.action-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 23px #ef82a866;
+}
+
+footer {
+  text-align: center;
+  padding: 15px 10px 35px;
+  font-size: 13px;
+  line-height: 2;
+}
+
+footer .footer-heart { font-size: 25px; }
+
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translate(-50%, 20px);
+  padding: 12px 20px;
+  border-radius: 25px;
+  background: #e85d91;
+  color: white;
+  opacity: 0;
+  pointer-events: none;
+  transition: .3s;
+  z-index: 10;
+  width: max-content;
+  max-width: 90%;
+  text-align: center;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+@media (max-width: 420px) {
+  .hero { padding-top: 38px; }
+  .section { padding: 23px 16px; }
+  .counter-grid { gap: 6px; }
+  .counter-box { padding: 13px 2px; }
+  .counter-label { font-size: 10px; }
+  .hero p { font-size: 15px; }
+  .memory-grid { grid-template-columns: 1fr; }
+  .nav-actions { gap: 4px; }
+  .music-btn { padding: 9px 10px; font-size: 12px; }
+  .volume-popover { right: -42px; }
+  .timeline-card { padding: 12px; }
+  .feature-grid { grid-template-columns: 1fr; }
+  .special-grid { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}
+</style>
+</head>
+
+<body>
+<div class="hearts-bg" id="heartsBg" aria-hidden="true"></div>
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+<main>
+  <nav>
+    <div class="logo">Neked ♡</div>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeBtn" aria-label="Hangulat váltása" aria-pressed="false">🌙</button>
+      <div class="volume-control" id="volumeControl">
+        <button class="volume-toggle" id="volumeToggle" type="button" aria-label="Hangerő megnyitása" aria-expanded="false">🔊</button>
+        <div class="volume-popover">
+          <span>Zene hangereje</span>
+          <input id="volumeSlider" type="range" min="0" max="100" step="1" value="65" aria-label="Zene hangereje">
+          <span class="volume-value" id="volumeValue">65%</span>
+        </div>
+      </div>
+      <button class="music-btn" id="musicBtn" aria-pressed="false">🎵 Marry You</button>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <span class="eyebrow">♡ EGY KIS OLDAL, CSAK NEKED ♡</span>
+    <h1>Szerelmem</h1>
+    <p>
+      Ha a világ összes szívét megkaphatnád,
+      akkor is az enyémet szeretném neked adni.
+      Mert az már régóta csak a tiéd. 💗
+    </p>
+    <div class="big-heart" id="bigHeart" role="button"
+         tabindex="0" aria-label="Szívecskék küldése">💖</div>
+    <p style="font-size:13px;margin-top:12px">
+      Koppints a szívre egy kis extra szeretetért ✨
+    </p>
+    <div class="hero-actions">
+      <button class="action-btn" id="wishBtn">✨ Kívánok nekünk valamit</button>
+      <button class="action-btn" id="scrollBtn">💌 Üzenetem</button>
+    </div>
+    <div class="typewriter" id="typewriter" aria-live="polite"></div>
+    <div class="pulse-line" aria-hidden="true"></div>
+  </header>
+
+  <section class="section">
+    <h2>⏳ A mi kis történetünk</h2>
+    <p class="section-intro">
+      Minden együtt töltött pillanat egy újabb ok arra,
+      hogy mosolyogjak. És ez a számláló minden másodpercben
+      emlékeztet rá, milyen különleges vagy nekem. 💕
+    </p>
+
+    <div class="counter-grid" aria-live="off">
+      <div class="counter-box">
+        <span class="counter-number" id="days">0</span>
+        <span class="counter-label">nap</span>
+      </div>
+      <div class="counter-box">
+        <span class="counter-number" id="hours">00</span>
+        <span class="counter-label">óra</span>
+      </div>
+      <div class="counter-box">
+        <span class="counter-number" id="minutes">00</span>
+        <span class="counter-label">perc</span>
+      </div>
+      <div class="counter-box">
+        <span class="counter-number" id="seconds">00</span>
+        <span class="counter-label">másodperc</span>
+      </div>
+    </div>
+    <p class="section-intro" style="font-size:12px;margin-top:15px">
+      És még mennyi gyönyörű pillanat vár ránk… ♡
+    </p>
+  </section>
+
+  <section class="section">
+    <h2>📸 A mi kis emlékeink</h2>
+    <p class="section-intro">Három pillanat, amit mindig magammal viszek.</p>
+    <div class="memory-grid">
+      <div class="memory-card" style="--tilt:-2deg"><strong>Első mosoly</strong><span>Az a pillanat, amikor minden kicsit szebb lett.</span></div>
+      <div class="memory-card" style="--tilt:1deg"><strong>Közös nevetés</strong><span>A kedvenc hangom a te nevetésed.</span></div>
+      <div class="memory-card" style="--tilt:-1deg"><strong>Mindig mi</strong><span>A legjobb emlékek még csak most jönnek.</span></div>
+    </div>
+    <div class="love-meter">
+      <div class="meter-label"><span>Szeretet-szint</span><strong id="meterValue">∞%</strong></div>
+      <div class="meter-track"><div class="meter-fill" id="meterFill"></div></div>
+    </div>
+    <div class="memory-form">
+      <h3 style="margin:0;color:#e85d91">➕ Új közös emlék</h3>
+      <input id="memoryTitle" maxlength="45" placeholder="Emlék címe, például: Az első közös séta" aria-label="Emlék címe">
+      <input id="memoryText" maxlength="180" placeholder="Mi történt? Írj róla pár kedves mondatot..." aria-label="Emlék leírása">
+      <select id="memoryEmoji" aria-label="Emlék ikonja">
+        <option value="💗">💗 Szeretet</option>
+        <option value="📸">📸 Fotó</option>
+        <option value="🌅">🌅 Kaland</option>
+        <option value="😂">😂 Nevetés</option>
+        <option value="🎁">🎁 Meglepetés</option>
+      </select>
+      <button class="action-btn" id="addMemory">💾 Emlék hozzáadása</button>
+      <div class="memory-wall" id="memoryWall" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>🕰️ A mi történetünk</h2>
+    <p class="section-intro">Minden szép kapcsolat apró pillanatokból épül fel.</p>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot">🌱</div>
+        <div class="timeline-card"><strong>Amikor elkezdődött</strong><span>Egy egyszerű pillanat, ami azóta is különleges helyet foglal el bennem.</span></div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot">💞</div>
+        <div class="timeline-card"><strong>Amikor igazán mi lettünk</strong><span>A sok beszélgetés, nevetés és apró figyelmesség lassan közös történetté vált.</span></div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot">✨</div>
+        <div class="timeline-card"><strong>Ami még előttünk van</strong><span>Új helyek, új emlékek és rengeteg olyan nap, amit együtt teszünk széppé.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>☕ Egy kis közös terv</h2>
+    <div class="date-box">
+      <p class="section-intro">Nyomd meg a gombot, és találjunk ki valami kedveset a következő közös napunkra.</p>
+      <div class="date-idea" id="dateIdea">Egy lassú séta, kézen fogva, valahol ahol szép a naplemente. 🌅</div>
+      <button class="action-btn" id="dateBtn">🎲 Új ötletet kérek</button>
+    </div>
+    <div class="quote-box"><p id="dailyQuote">A legszebb hely mindig az, ahol együtt vagyunk.</p></div>
+    <div class="kiss-counter">Eddigi puszik ezen az oldalon: <strong id="kissCount">0</strong> 💋</div>
+  </section>
+
+  <section class="section">
+    <h2>✨ Mai kis szeretet-sarok</h2>
+    <div class="special-grid">
+      <div class="special-card">
+        <h3>🌷 Mai kihívás</h3>
+        <p class="challenge-text" id="challengeText"></p>
+        <button class="action-btn" id="challengeBtn">✅ Teljesítettem</button>
+      </div>
+      <div class="special-card">
+        <h3 class="countdown-label" id="countdownLabel">🗓️ Következő különleges nap</h3>
+        <div class="countdown" aria-live="polite">
+          <div class="countdown-unit"><strong id="countDays">--</strong><span>nap</span></div>
+          <div class="countdown-unit"><strong id="countHours">--</strong><span>óra</span></div>
+          <div class="countdown-unit"><strong id="countMinutes">--</strong><span>perc</span></div>
+          <div class="countdown-unit"><strong id="countSeconds">--</strong><span>mp</span></div>
+        </div>
+        <p class="small-hint">Addig is gyűjtsünk még több közös emléket. 💞</p>
+        <div class="countdown-form">
+          <input id="eventName" type="text" maxlength="35" placeholder="Esemény neve, például: Évfordulónk">
+          <input id="eventDate" type="datetime-local" aria-label="Különleges dátum">
+          <button class="backup-btn" id="setCountdown" type="button">🗓️ Visszaszámláló beállítása</button>
+        </div>
+      </div>
+      <div class="special-card">
+        <h3>🫂 Küldj egy ölelést</h3>
+        <button class="hug-btn" id="hugBtn" aria-label="Ölelés küldése">🫂</button>
+        <span class="hug-number" id="hugCount">0</span>
+        <span class="small-hint">ölelés elküldve</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>💌 Egy üzenet neked</h2>
+    <div class="love-note">
+      Szerelmem,
+
+      <br><br>
+      Lehet, hogy nem mindig találom meg a tökéletes szavakat,
+      de szeretném, ha tudnád, mennyire sokat jelentesz nekem.
+      A mosolyod szebbé teszi a napjaimat, a nevetésed
+      a kedvenc hangom, és a veled töltött idő az egyik
+      legszebb ajándék az életemben.
+
+      <br><br>
+      Nem azért vagy különleges, mert tökéletes vagy,
+      hanem azért, mert te vagy te. Szeretném veled
+      megélni a kis hétköznapi boldogságokat, a nagy
+      kalandokat, a sok nevetést és még rengeteg közös emléket.
+
+      <br><br>
+      Köszönöm, hogy vagy nekem.
+      Ha újra és újra választhatnék, én akkor is
+      szeretnék veled még egy szép pillanatot. ❤️
+
+      <span class="signature">Örökké a te embered ♡</span>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>💞 Kettőnkről szól</h2>
+    <p class="section-intro">Válassz hangulatot, válaszolj egy kérdésre, vagy írj nekünk egy saját üzenetet.</p>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <h3>🌈 Milyen napod van?</h3>
+        <div class="mood-options" role="group" aria-label="Hangulat választása">
+          <button class="mood-btn" data-mood="boldog">😊 Boldog</button>
+          <button class="mood-btn" data-mood="fáradt">😴 Fáradt</button>
+          <button class="mood-btn" data-mood="romantikus">🥰 Romantikus</button>
+          <button class="mood-btn" data-mood="vidám">✨ Vidám</button>
+        </div>
+        <p class="mood-result" id="moodResult">Válassz egy hangulatot, és kapsz egy kis szeretetet.</p>
+        <div class="mood-history">
+          <h4>📖 Legutóbbi hangulatok</h4>
+          <div class="mood-history-list" id="moodHistoryList"></div>
+          <button class="clear-history" id="clearMoodHistory" type="button">Napló törlése</button>
+        </div>
+      </div>
+      <div class="feature-card">
+        <h3>💭 Szerelmi kvíz</h3>
+        <p style="font-size:13px;line-height:1.6">Mi az, amitől igazán különleges a közös történetünk?</p>
+        <div class="quiz-options">
+          <button class="quiz-option" data-correct="false">Az, hogy mindig minden tökéletes.</button>
+          <button class="quiz-option" data-correct="true">Az, hogy egymás mellett önmagunk lehetünk.</button>
+          <button class="quiz-option" data-correct="false">Az, hogy sosem nevetünk semmin.</button>
+        </div>
+        <p class="quiz-result" id="quizResult" aria-live="polite"></p>
+      </div>
+    </div>
+    <div class="note-form">
+      <h3 style="margin:8px 0 0;color:#e85d91">📝 Saját kis emlék</h3>
+      <textarea id="personalNote" maxlength="240" placeholder="Írj ide egy mondatot, amit szeretnél megőrizni..." aria-label="Saját emlék"></textarea>
+      <button class="action-btn" id="saveNote">💾 Emlék mentése</button>
+      <div class="saved-note" id="savedNote" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>🌷 Pár dolog, amit imádok benned</h2>
+    <p class="section-intro">
+      És ez még csak néhány a sok közül…
+    </p>
+
+    <div class="reason-list">
+      <div class="reason">
+        <span>🥹</span>
+        <span>A mosolyod, amitől nekem is rögtön jobb kedvem lesz.</span>
+      </div>
+      <div class="reason">
+        <span>🫶</span>
+        <span>Az, ahogyan melletted önmagam lehetek.</span>
+      </div>
+      <div class="reason">
+        <span>😂</span>
+        <span>A közös nevetéseink és a kis hülyeségeink.</span>
+      </div>
+      <div class="reason">
+        <span>💗</span>
+        <span>Az a sok apróság, amitől egyszerűen te vagy te.</span>
+      </div>
+      <div class="reason">
+        <span>✨</span>
+        <span>Az összes közös emlék, és azok is, amiket még együtt szerzünk.</span>
+      </div>
+    </div>
+    <div class="wishlist">
+      <h3 style="margin:14px 0 0;color:#e85d91;text-align:center">📋 Közös kívánságlista</h3>
+      <div class="wish-item"><input type="checkbox" id="wish1"><label for="wish1">Nézzünk meg együtt egy naplementét.</label></div>
+      <div class="wish-item"><input type="checkbox" id="wish2"><label for="wish2">Készítsünk egy közös fényképet.</label></div>
+      <div class="wish-item"><input type="checkbox" id="wish3"><label for="wish3">Nevessünk egy teljes estén keresztül.</label></div>
+      <div class="wish-item"><input type="checkbox" id="wish4"><label for="wish4">Tervezzünk meg egy közös kalandot.</label></div>
+      <p class="wishlist-status" id="wishlistStatus">0 / 4 közös kívánság teljesítve 💗</p>
+    </div>
+  </section>
+
+  <section class="section surprise-wrap">
+    <h2>🎁 Van itt valami csak neked…</h2>
+    <p class="section-intro">
+      Egy apró titok vár rád.
+      Készen állsz felfedezni? 💗
+    </p>
+
+    <button class="gift" id="giftBtn"
+            aria-label="Titkos ajándék kinyitása"
+            aria-expanded="false">🎁</button>
+    <p class="small-hint">Koppints az ajándékra, szerelmem ♡</p>
+
+    <div class="surprise-content" id="surprise" aria-live="polite">
+      <div style="font-size:45px">💝</div>
+      <h3 style="color:#e85d91">Meglepetés, Szerelmem!</h3>
+      <p>
+        Ha most itt lennél, adnék neked egy hatalmas ölelést,
+        és azt mondanám: ne felejtsd el soha, hogy mennyire
+        fontos vagy nekem. 🥹💗
+      </p>
+      <p>
+        Ez az oldal csak egy apró emlékeztető arra,
+        hogy valaki nagyon-nagyon szeret.
+      </p>
+      <p style="font-family:Pacifico,cursive;font-size:23px;color:#e85d91">
+        Te vagy az én kedvenc emberem. ♡
+      </p>
+      <button class="action-btn" id="moreLove">Még egy kis szeretetet! 💕</button>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>🧠 Szerelmes memóriajáték</h2>
+    <p class="section-intro">Találd meg az összetartozó párokat, és gyűjtsd össze az összes szívet!</p>
+    <div class="game-board" id="gameBoard" aria-label="Szerelmes memóriajáték"></div>
+    <p class="game-status" id="gameStatus" aria-live="polite">Párok: 0 / 4</p>
+    <button class="game-reset" id="gameReset" type="button">🔄 Új játék</button>
+  </section>
+
+  <section class="section">
+    <h2>💬 Kettőnkről kérdezem</h2>
+    <div class="question-card">
+      <div class="question-text" id="questionText">Készen állsz egy kis közös gondolkodásra? ✨</div>
+      <div class="answer-text" id="answerText">Kattints a kérdésre, és fedezz fel egy kedves választ.</div>
+      <button class="action-btn" id="questionBtn">💭 Új kérdés</button>
+      <button class="game-reset" id="answerBtn" type="button">💌 Válasz felfedése</button>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>⚡ Szívdobbanás-próba</h2>
+    <p class="section-intro">Indítsd el, majd kattints a szívre, amilyen gyorsan csak tudsz!</p>
+    <div class="reaction-area" id="reactionArea"><button class="reaction-heart" id="reactionHeart" aria-label="Kattints a szívre">💗</button></div>
+    <p class="reaction-status" id="reactionStatus">A játék még nem indult el.</p>
+    <button class="action-btn" id="reactionStart">▶️ Indítás</button>
+  </section>
+
+  <section class="section">
+    <h2>💌 Véletlen szerelmes üzenet</h2>
+    <div class="letter-box">
+      <div class="letter-text" id="letterText">Kattints a gombra, és érkezik egy kis szeretet. 💗</div>
+      <button class="action-btn" id="letterBtn">✨ Új üzenetet kérek</button>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-heart">💗</div>
+    Készült neked, sok-sok szeretettel.
+    <br>
+    Te + én = egy csomó szép emlék. ♡
+    <br>
+    <span id="footerYear"></span>
+    <div class="share-row">
+      <button class="action-btn" id="shareBtn">💌 Oldal megosztása</button>
+      <button class="action-btn" id="topBtn">⬆️ Vissza a tetejére</button>
+    </div>
+    <div class="backup-panel">
+      <h3>🛡️ Emlékek biztonsági mentése</h3>
+      <p class="small-hint">Mentsd le az oldal adatait fájlba, hogy később vissza tudd tölteni őket.</p>
+      <div class="backup-actions">
+        <button class="backup-btn" id="exportData">⬇️ Adatok mentése</button>
+        <button class="backup-btn" id="importData">⬆️ Adatok visszatöltése</button>
+        <input id="importFile" type="file" accept="application/json" hidden>
+      </div>
+    </div>
+  </footer>
+</main>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+
+const SETTINGS = {
+  startDate: "2026-09-08T11:00:00",
+  name: "Szerelmem",
+  nextSpecialDate: "2026-12-24T18:00:00",
+  challenges: [
+    "Küldj egy üzenetet arról, miért vagy ma hálás. 💌",
+    "Adj magadnak tíz perc nyugalmat, és gondolj egy kedves közös emlékre. 🌷",
+    "Küldj egy puszit annak, aki ma a legjobban hiányzik. 💋",
+    "Írj le egy közös álmot, amit egyszer együtt megvalósítunk. ✨",
+    "Mondd ki hangosan: ma is szeretlek. 💗",
+    "Készíts egy képet valamiről, ami ma mosolyt csalt az arcodra. 📸",
+    "Hallgass meg egy dalt, ami rólam vagy rólunk eszedbe juttat valamit. 🎵",
+    "Írj három dolgot, amit szeretsz bennem. 📝",
+    "Küldj egy vicces vagy cuki mémet, amin együtt nevethetünk. 😂",
+    "Igyál egy pohár vizet, és közben gondolj egy nagy ölelésre. 🫂",
+    "Tegyél félre öt percet csak magadra, mert te is fontos vagy. 🌸",
+    "Keress egy felhőt, ami valamire emlékeztet. ☁️",
+    "Írj egy mondatot arról, milyen lesz egy közös napunk a jövőben. 🌅",
+    "Küldj egy teljesen váratlan, kedves üzenetet. 💞",
+    "Nézz vissza egy régi közös fényképet, és idézd fel a pillanatot. 📷",
+    "Táncolj egy percet a kedvenc zenédre. 💃",
+    "Gondolj arra a tulajdonságomra, amitől szerinted különleges vagyok. ✨",
+    "Írj egy mini kívánságlistát a következő közös programunkhoz. 📋",
+    "Kóstolj meg ma valami finomat, amit később velem is megosztanál. 🍓",
+    "Küldj egy hangüzenetet csak azért, hogy hallhassam a hangod. 🎙️",
+    "Találj ki nekünk egy becenevet erre a napra. 🐻",
+    "Nézz ki az ablakon, és képzeld el, hogy együtt látjuk ugyanazt az eget. 🌙",
+    "Írj egy rövid levelet a jövőbeli önmagunknak. 💌",
+    "Tegyél valami apró jót valakiért ma. 🤍",
+    "Küldj egy képet a napod legszebb pillanatáról. 🌼",
+    "Gondolj egy helyre, ahová egyszer mindenképpen el szeretnél velem jutni. 🗺️",
+    "Nevess fel egy régi közös poénon, még akkor is, ha más nem érti. 😄",
+    "Írj egy szót, ami szerinted legjobban leír minket. 💑",
+    "Készíts magadnak egy finom italt, és tarts egy kis pihenőt. ☕",
+    "Küldj egy szívet ok nélkül. ❤️",
+    "Tervezz meg fejben egy tökéletes közös vasárnapot. 🧸",
+    "Mondj valakinek valami őszintén kedveset. 🌈",
+    "Írj le egy pillanatot, amikor büszke voltál ránk. 🥹",
+    "Keress egy virágot vagy szép részletet a környezetedben. 🌷",
+    "Képzeld el, milyen lenne most egy nagy közös takaró alatti összebújás. 🛋️",
+    "Találj ki egy új közös hagyományt nekünk. 🎀",
+    "Küldj egy jóéjt vagy jóreggelt üzenetet extra sok szeretettel. 🌙",
+    "Írj egy mondatot arról, miért vagy fontos nekem. 💖",
+    "Válassz ki egy filmet, amit egyszer együtt megnézünk. 🎬",
+    "Mosolyogj magadra a tükörben, és emlékezz rá, mennyire szeretlek. 😊"
+  ],
+  dateIdeas: [
+    "Közös palacsintasütés, ahol a végén biztosan lesz egy kis lisztháború. 🥞",
+    "Filmnézős este takaróval, kedvenc nasival és összebújással. 🎬",
+    "Egy spontán kiruccanás egy új helyre, csak mi ketten. 🚗",
+    "Közös főzés zenével, tánccal és sok-sok nevetéssel. 🍝",
+    "Naplementenézés egy padon, kézen fogva, telefonok nélkül. 🌅"
+  ],
+  quotes: [
+    "A legszebb hely mindig az, ahol együtt vagyunk.",
+    "Veled a hétköznapokból is emlék lesz.",
+    "Nem kell tökéletes nap, csak egy közös pillanat.",
+    "A szívemnek te vagy az otthon érzése."
+  ]
+};
+
+const startDate = new Date(SETTINGS.startDate);
+
+function updateCounter() {
+  const now = new Date();
+
+  if (Number.isNaN(startDate.getTime()) || startDate > now) {
+    document.getElementById("days").textContent = "—";
+    document.getElementById("hours").textContent = "—";
+    document.getElementById("minutes").textContent = "—";
+    document.getElementById("seconds").textContent = "—";
+    return;
+  }
+
+  let total = Math.floor((now - startDate) / 1000);
+
+  const days = Math.floor(total / 86400);
+  total %= 86400;
+
+  const hours = Math.floor(total / 3600);
+  total %= 3600;
+
+  const minutes = Math.floor(total / 60);
+  const seconds = total % 60;
+
+  document.getElementById("days").textContent = days;
+  document.getElementById("hours").textContent =
+    String(hours).padStart(2, "0");
+  document.getElementById("minutes").textContent =
+    String(minutes).padStart(2, "0");
+  document.getElementById("seconds").textContent =
+    String(seconds).padStart(2, "0");
+}
+
+updateCounter();
+setInterval(updateCounter, 1000);
+
+document.getElementById("footerYear").textContent =
+  "♡ " + new Date().getFullYear() + " ♡";
+
+const heartsBg = document.getElementById("heartsBg");
+const heartSymbols = ["♡", "♥", "💗", "💕", "✧", "💖"];
+
+function createHeart(x = null, y = null) {
+  const heart = document.createElement("span");
+  heart.className = "floating-heart";
+  heart.textContent =
+    heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+
+  const left = x === null ? Math.random() * 100 : x;
+  const size = 14 + Math.random() * 23;
+  const duration = 5 + Math.random() * 6;
+
+  heart.style.left = left + "%";
+  heart.style.fontSize = size + "px";
+  heart.style.animationDuration = duration + "s";
+  heart.style.color = ["#ff85ad", "#f5a1c2", "#e86b9c", "#ffb6cf"][
+    Math.floor(Math.random() * 4)
+  ];
+
+  if (y !== null) {
+    heart.style.bottom = "auto";
+    heart.style.top = y + "px";
+  }
+
+  heartsBg.appendChild(heart);
+  setTimeout(() => heart.remove(), duration * 1000 + 100);
+}
+
+setInterval(() => createHeart(), 500);
+
+function heartExplosion() {
+  for (let i = 0; i < 22; i++) {
+    setTimeout(() => {
+      createHeart(15 + Math.random() * 70);
+    }, i * 45);
+  }
+  showToast("Küldtem neked egy csomó szeretetet! 💗");
+  incrementKissCount();
+}
+
+const kissCountElement = document.getElementById("kissCount");
+let kissCount = Number(localStorage.getItem("kiss-count") || 0);
+kissCountElement.textContent = kissCount;
+
+function incrementKissCount() {
+  kissCount++;
+  kissCountElement.textContent = kissCount;
+  localStorage.setItem("kiss-count", String(kissCount));
+}
+
+const bigHeart = document.getElementById("bigHeart");
+bigHeart.addEventListener("click", heartExplosion);
+bigHeart.addEventListener("keydown", e => {
+  if (e.key === "Enter" || e.key === " ") {
+    e.preventDefault();
+    heartExplosion();
+  }
+});
+
+const giftBtn = document.getElementById("giftBtn");
+const surprise = document.getElementById("surprise");
+
+giftBtn.addEventListener("click", () => {
+  const isOpen = surprise.classList.toggle("open");
+  giftBtn.textContent = isOpen ? "💝" : "🎁";
+  giftBtn.setAttribute("aria-expanded", String(isOpen));
+
+  if (isOpen) {
+    heartExplosion();
+    giftBtn.setAttribute("aria-label", "Titkos ajándék becsukása");
+  } else {
+    giftBtn.setAttribute("aria-label", "Titkos ajándék kinyitása");
+  }
+});
+
+document.getElementById("moreLove").addEventListener("click", () => {
+  heartExplosion();
+  showToast("Szeretlek, " + SETTINGS.name + "! 💕");
+});
+
+let toastTimeout;
+
+function showToast(message) {
+  const toast = document.getElementById("toast");
+  toast.textContent = message;
+  toast.classList.add("show");
+  clearTimeout(toastTimeout);
+  toastTimeout = setTimeout(() => {
+    toast.classList.remove("show");
+  }, 2600);
+}
+
+let audioContext = null;
+const savedVolume = Number(localStorage.getItem("lexi-music-volume"));
+const musicVolume = Number.isFinite(savedVolume) ? Math.min(Math.max(savedVolume, 0), 1) : 0.65;
+const songAudio = new Audio("marry-you.mp3");
+songAudio.loop = true;
+songAudio.volume = musicVolume;
+let musicTimer = null;
+let musicOn = false;
+let usingSongFile = false;
+let masterGain = null;
+let nextNoteTime = 0;
+let noteIndex = 0;
+
+const melody = [
+  523.25, 659.25, 783.99, 659.25,
+  587.33, 698.46, 880.00, 698.46,
+  523.25, 659.25, 783.99, 1046.50,
+  880.00, 783.99, 659.25, 587.33
+];
+
+function playNote(frequency, time, duration, volume, type = "sine") {
+  if (!audioContext || !masterGain) return;
+
+  const oscillator = audioContext.createOscillator();
+  const gain = audioContext.createGain();
+
+  oscillator.type = type;
+  oscillator.frequency.setValueAtTime(frequency, time);
+
+  gain.gain.setValueAtTime(0.0001, time);
+  gain.gain.exponentialRampToValueAtTime(
+    Math.max(volume, 0.0002), time + 0.06
+  );
+  gain.gain.exponentialRampToValueAtTime(
+    0.0001, time + duration
+  );
+
+  oscillator.connect(gain);
+  gain.connect(masterGain);
+
+  oscillator.start(time);
+  oscillator.stop(time + duration + 0.05);
+}
+
+function scheduleMusic() {
+  if (!musicOn || !audioContext) return;
+
+  while (nextNoteTime < audioContext.currentTime + 0.3) {
+    const frequency = melody[noteIndex % melody.length];
+
+    playNote(frequency, nextNoteTime, 1.05, 0.075);
+    
+    if (noteIndex % 4 === 0) {
+      playNote(frequency / 2, nextNoteTime, 1.5, 0.025);
+    }
+
+    nextNoteTime += 0.48;
+    noteIndex++;
+  }
+}
+
+async function toggleMusic() {
+  const btn = document.getElementById("musicBtn");
+
+  try {
+    if (!musicOn) {
+      try {
+        await songAudio.play();
+        usingSongFile = true;
+      } catch (error) {
+        usingSongFile = false;
+      }
+    }
+
+    if (!usingSongFile && !audioContext) {
+      const AudioCtx = window.AudioContext ||
+                       window.webkitAudioContext;
+
+      if (!AudioCtx) {
+        showToast("A böngésződ nem támogatja a háttérzenét. 💗");
+        return;
+      }
+
+      audioContext = new AudioCtx();
+      masterGain = audioContext.createGain();
+      masterGain.gain.value = musicVolume;
+      masterGain.connect(audioContext.destination);
+    }
+
+    if (!musicOn) {
+      if (usingSongFile) {
+        musicOn = true;
+        btn.textContent = "⏸ Marry you szól";
+        btn.setAttribute("aria-pressed", "true");
+        showToast("Bruno Mars - Marry You bekapcsolva ♡");
+        return;
+      }
+
+      await audioContext.resume();
+      musicOn = true;
+      nextNoteTime = audioContext.currentTime + 0.1;
+
+      scheduleMusic();
+      musicTimer = setInterval(scheduleMusic, 100);
+
+      btn.textContent = "🎵 Zene kikapcsolása";
+      btn.setAttribute("aria-pressed", "true");
+      showToast("Romantikus zene bekapcsolva ♡");
+    } else {
+      musicOn = false;
+      if (usingSongFile) {
+        songAudio.pause();
+        songAudio.currentTime = 0;
+        usingSongFile = false;
+        btn.textContent = "🎵 Marry You";
+        btn.setAttribute("aria-pressed", "false");
+        showToast("A zene megpihent. 💗");
+        return;
+      }
+      clearInterval(musicTimer);
+      musicTimer = null;
+
+      await audioContext.suspend();
+
+      btn.textContent = "🎵 Zene bekapcsolása";
+      btn.setAttribute("aria-pressed", "false");
+      showToast("A zene megpihent. 💗");
+    }
+  } catch (error) {
+    musicOn = false;
+    clearInterval(musicTimer);
+    btn.textContent = "🎵 Zene bekapcsolása";
+    btn.setAttribute("aria-pressed", "false");
+    showToast("A zene most nem indítható el ezen a böngészőn.");
+  }
+}
+
+const themeBtn = document.getElementById("themeBtn");
+const savedTheme = localStorage.getItem("lexi-theme");
+if (savedTheme === "dark") {
+  document.body.classList.add("dark-mode");
+  themeBtn.textContent = "☀️";
+  themeBtn.setAttribute("aria-pressed", "true");
+}
+
+themeBtn.addEventListener("click", () => {
+  const isDark = document.body.classList.toggle("dark-mode");
+  themeBtn.textContent = isDark ? "☀️" : "🌙";
+  themeBtn.setAttribute("aria-pressed", String(isDark));
+  localStorage.setItem("lexi-theme", isDark ? "dark" : "light");
+  showToast(isDark ? "Esti hangulat bekapcsolva ✨" : "Rózsaszín napfény visszatért 💗");
+});
+
+function sparkleBurst() {
+  const symbols = ["✦", "✧", "♡", "✨"];
+  for (let i = 0; i < 18; i++) {
+    const sparkle = document.createElement("span");
+    sparkle.className = "floating-heart";
+    sparkle.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+    sparkle.style.left = 15 + Math.random() * 70 + "%";
+    sparkle.style.bottom = 25 + Math.random() * 35 + "%";
+    sparkle.style.color = "#fff";
+    sparkle.style.fontSize = 12 + Math.random() * 18 + "px";
+    sparkle.style.animationDuration = 1.4 + Math.random() * 1.8 + "s";
+    heartsBg.appendChild(sparkle);
+    setTimeout(() => sparkle.remove(), 3500);
+  }
+}
+
+document.getElementById("wishBtn").addEventListener("click", () => {
+  sparkleBurst();
+  heartExplosion();
+  showToast("A kívánságom egyszerű: mindig legyenünk mi. ✨");
+});
+
+document.getElementById("scrollBtn").addEventListener("click", () => {
+  document.querySelectorAll(".love-note")[0].scrollIntoView({ behavior: "smooth", block: "center" });
+});
+
+const typewriter = document.getElementById("typewriter");
+const typedMessage = "Te vagy a kedvenc történetem. ♡";
+let typedIndex = 0;
+function typeMessage() {
+  if (typedIndex <= typedMessage.length) {
+    typewriter.textContent = typedMessage.slice(0, typedIndex);
+    typedIndex++;
+    setTimeout(typeMessage, 75);
+  }
+}
+setTimeout(typeMessage, 500);
+
+let meter = 78;
+document.getElementById("meterFill").addEventListener("click", () => {
+  meter = Math.min(meter + 3, 100);
+  document.getElementById("meterFill").style.width = meter + "%";
+  document.getElementById("meterValue").textContent = meter >= 100 ? "∞%" : meter + "%";
+  sparkleBurst();
+});
+
+document.getElementById("dateBtn").addEventListener("click", () => {
+  const ideas = SETTINGS.dateIdeas;
+  const current = document.getElementById("dateIdea").textContent;
+  let next = current;
+  while (ideas.length > 1 && next === current) {
+    next = ideas[Math.floor(Math.random() * ideas.length)];
+  }
+  document.getElementById("dateIdea").textContent = next;
+  sparkleBurst();
+  showToast("Találtam egy új közös programot! 💞");
+});
+
+const quote = SETTINGS.quotes[new Date().getDate() % SETTINGS.quotes.length];
+document.getElementById("dailyQuote").textContent = quote;
+
+const challengeDate = new Date().toISOString().slice(0, 10);
+const today = new Date();
+const yearStart = Date.UTC(today.getFullYear(), 0, 1);
+const todayUtc = Date.UTC(today.getFullYear(), today.getMonth(), today.getDate());
+const dayOfYear = Math.floor((todayUtc - yearStart) / 86400000);
+const challengeIndex = dayOfYear % SETTINGS.challenges.length;
+const challengeText = document.getElementById("challengeText");
+const challengeButton = document.getElementById("challengeBtn");
+const challengeCompleted = localStorage.getItem("lexi-challenge-date") === challengeDate;
+challengeText.textContent = SETTINGS.challenges[challengeIndex];
+
+function updateChallengeState(completed) {
+  challengeText.classList.toggle("challenge-done", completed);
+  challengeButton.textContent = completed ? "↩️ Újra megnyitom" : "✅ Teljesítettem";
+}
+
+updateChallengeState(challengeCompleted);
+challengeButton.addEventListener("click", () => {
+  const isCompleted = localStorage.getItem("lexi-challenge-date") === challengeDate;
+  if (isCompleted) {
+    localStorage.removeItem("lexi-challenge-date");
+    updateChallengeState(false);
+    showToast("A kihívás újra vár rád. 💗");
+  } else {
+    localStorage.setItem("lexi-challenge-date", challengeDate);
+    updateChallengeState(true);
+    sparkleBurst();
+    showToast("Büszke vagyok rád, teljesítetted a mai kihívást! ✨");
+  }
+});
+
+let countdownTarget = new Date(SETTINGS.nextSpecialDate);
+function updateCountdown() {
+  const remaining = countdownTarget.getTime() - Date.now();
+  if (Number.isNaN(countdownTarget.getTime()) || remaining <= 0) {
+    ["countDays", "countHours", "countMinutes", "countSeconds"].forEach(id => {
+      document.getElementById(id).textContent = "0";
+    });
+    return;
+  }
+  let seconds = Math.floor(remaining / 1000);
+  const days = Math.floor(seconds / 86400);
+  seconds %= 86400;
+  const hours = Math.floor(seconds / 3600);
+  seconds %= 3600;
+  const minutes = Math.floor(seconds / 60);
+  const finalSeconds = seconds % 60;
+  document.getElementById("countDays").textContent = days;
+  document.getElementById("countHours").textContent = String(hours).padStart(2, "0");
+  document.getElementById("countMinutes").textContent = String(minutes).padStart(2, "0");
+  document.getElementById("countSeconds").textContent = String(finalSeconds).padStart(2, "0");
+}
+
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+document.getElementById("setCountdown").addEventListener("click", () => {
+  const dateValue = document.getElementById("eventDate").value;
+  const nameValue = document.getElementById("eventName").value.trim();
+  const selectedDate = new Date(dateValue);
+
+  if (!dateValue || Number.isNaN(selectedDate.getTime()) || selectedDate <= new Date()) {
+    showToast("Válassz egy jövőbeli dátumot. 🗓️");
+    return;
+  }
+
+  countdownTarget = selectedDate;
+  document.getElementById("countdownLabel").textContent = nameValue
+    ? "🗓️ " + nameValue
+    : "🗓️ Következő különleges nap";
+  updateCountdown();
+  showToast("A személyes visszaszámláló elkészült. ✨");
+});
+
+const hugCountElement = document.getElementById("hugCount");
+let hugCount = Number(localStorage.getItem("lexi-hug-count") || 0);
+hugCountElement.textContent = hugCount;
+document.getElementById("hugBtn").addEventListener("click", () => {
+  hugCount++;
+  hugCountElement.textContent = hugCount;
+  localStorage.setItem("lexi-hug-count", String(hugCount));
+  sparkleBurst();
+  showToast("Egy nagy ölelés úton van hozzád! 🫂");
+});
+
+const moodMessages = {
+  boldog: "Őrizd meg ezt a mosolyt, mert gyönyörűen áll neked. 😊 Ha ma valami jó történt veled, szeretném, ha sokáig elraktároznád ezt az érzést. Én pedig itt vagyok, hogy még egy kicsit hozzáadjak a boldogságodhoz.",
+  fáradt: "Pihenj egy kicsit, nem kell mindig mindent egyedül elbírnod. 🫂 Hunyd le a szemed, vegyél egy mély levegőt, és képzeld el, hogy szorosan megölellek. Holnap új nap kezdődik, ma pedig elég annyi, hogy vigyázol magadra.",
+  romantikus: "Akkor ez a tökéletes pillanat egy kis összebújáshoz. 💗 Szeretném, ha tudnád, hogy a legcsendesebb pillanatokban is rád gondolok. Te vagy az a különleges ember, akivel még a csend is otthonos.",
+  vidám: "A jókedvedből nekem is jutott, most már dupla a mosoly. ✨ Nevetj hangosan, élvezd ezt a napot, és gyűjtsünk még több közös emléket. A te örömöd valahogy mindig szebbé teszi az én világomat is."
+};
+
+const moodHistoryList = document.getElementById("moodHistoryList");
+let moodHistory = JSON.parse(localStorage.getItem("lexi-mood-history") || "[]");
+
+function renderMoodHistory() {
+  moodHistoryList.innerHTML = "";
+  if (!moodHistory.length) {
+    const empty = document.createElement("span");
+    empty.textContent = "Még nincs elmentett hangulatod.";
+    empty.style.opacity = ".7";
+    empty.style.fontSize = "12px";
+    moodHistoryList.appendChild(empty);
+    return;
+  }
+
+  moodHistory.slice(0, 5).forEach(entry => {
+    const row = document.createElement("div");
+    row.className = "mood-history-item";
+    const mood = document.createElement("strong");
+    mood.textContent = entry.mood;
+    const date = document.createElement("span");
+    date.textContent = entry.date;
+    row.append(mood, date);
+    moodHistoryList.appendChild(row);
+  });
+}
+
+function saveMood(mood) {
+  const date = new Date().toLocaleDateString("hu-HU");
+  moodHistory = moodHistory.filter(entry => entry.date !== date);
+  moodHistory.unshift({ mood, date });
+  moodHistory = moodHistory.slice(0, 30);
+  localStorage.setItem("lexi-mood-history", JSON.stringify(moodHistory));
+  renderMoodHistory();
+}
+
+renderMoodHistory();
+
+document.getElementById("clearMoodHistory").addEventListener("click", () => {
+  moodHistory = [];
+  localStorage.removeItem("lexi-mood-history");
+  renderMoodHistory();
+  showToast("A hangulatnaplót töröltem. 💗");
+});
+
+document.querySelectorAll(".mood-btn").forEach(button => {
+  button.addEventListener("click", () => {
+    document.querySelectorAll(".mood-btn").forEach(item => item.classList.remove("selected"));
+    button.classList.add("selected");
+    document.getElementById("moodResult").textContent = moodMessages[button.dataset.mood];
+    saveMood(button.textContent);
+    sparkleBurst();
+  });
+});
+
+document.querySelectorAll(".quiz-option").forEach(option => {
+  option.addEventListener("click", () => {
+    const result = document.getElementById("quizResult");
+    if (option.dataset.correct === "true") {
+      result.textContent = "Helyes válasz! Pont ezért vagyunk mi. 💞";
+      heartExplosion();
+    } else {
+      result.textContent = "Majdnem... a legjobb válasz mindig az, hogy egymás lehetünk. 💗";
+    }
+  });
+});
+
+const personalNote = document.getElementById("personalNote");
+const savedNote = document.getElementById("savedNote");
+const storedNote = localStorage.getItem("personal-note");
+
+function showSavedNote(note) {
+  savedNote.textContent = note ? "Megőrzött emlék: „" + note + "”" : "";
+  savedNote.classList.toggle("visible", Boolean(note));
+}
+
+if (storedNote) {
+  personalNote.value = storedNote;
+  showSavedNote(storedNote);
+}
+
+const memoryWall = document.getElementById("memoryWall");
+let savedMemories = JSON.parse(localStorage.getItem("lexi-memories") || "[]");
+
+function renderMemories() {
+  memoryWall.innerHTML = "";
+  if (!savedMemories.length) {
+    const emptyMessage = document.createElement("p");
+    emptyMessage.className = "empty-wall";
+    emptyMessage.textContent = "Még nincs saját emléked itt. Legyen ez az első. 💞";
+    memoryWall.appendChild(emptyMessage);
+    return;
+  }
+
+  [...savedMemories].reverse().forEach((memory, reverseIndex) => {
+    const actualIndex = savedMemories.length - 1 - reverseIndex;
+    const entry = document.createElement("article");
+    entry.className = "memory-entry";
+
+    const icon = document.createElement("div");
+    icon.className = "memory-entry-icon";
+    icon.textContent = memory.emoji;
+
+    const content = document.createElement("div");
+    const title = document.createElement("strong");
+    title.textContent = memory.title;
+    const text = document.createElement("p");
+    text.textContent = memory.text;
+    content.append(title, text);
+
+    const deleteButton = document.createElement("button");
+    deleteButton.className = "delete-memory";
+    deleteButton.type = "button";
+    deleteButton.textContent = "×";
+    deleteButton.setAttribute("aria-label", "Emlék törlése");
+    deleteButton.addEventListener("click", () => {
+      savedMemories.splice(actualIndex, 1);
+      localStorage.setItem("lexi-memories", JSON.stringify(savedMemories));
+      renderMemories();
+      showToast("Az emléket eltávolítottam. 💗");
+    });
+
+    entry.append(icon, content, deleteButton);
+    memoryWall.appendChild(entry);
+  });
+}
+
+renderMemories();
+
+document.getElementById("addMemory").addEventListener("click", () => {
+  const titleInput = document.getElementById("memoryTitle");
+  const textInput = document.getElementById("memoryText");
+  const title = titleInput.value.trim();
+  const text = textInput.value.trim();
+
+  if (!title || !text) {
+    showToast("Írd meg az emlék címét és történetét is. 💌");
+    (!title ? titleInput : textInput).focus();
+    return;
+  }
+
+  savedMemories.push({
+    title,
+    text,
+    emoji: document.getElementById("memoryEmoji").value
+  });
+  localStorage.setItem("lexi-memories", JSON.stringify(savedMemories));
+  titleInput.value = "";
+  textInput.value = "";
+  renderMemories();
+  showToast("Az új közös emlék elmentve. 💗");
+  sparkleBurst();
+});
+
+document.getElementById("saveNote").addEventListener("click", () => {
+  const note = personalNote.value.trim();
+  if (!note) {
+    showToast("Írj előbb egy kis emléket. 💌");
+    personalNote.focus();
+    return;
+  }
+  localStorage.setItem("personal-note", note);
+  showSavedNote(note);
+  showToast("Az emlékedet megőriztem. 💗");
+  sparkleBurst();
+});
+
+const wishItems = [...document.querySelectorAll(".wish-item input")];
+const wishlistStatus = document.getElementById("wishlistStatus");
+const savedWishes = JSON.parse(localStorage.getItem("wishes") || "[]");
+
+wishItems.forEach((item, index) => {
+  item.checked = savedWishes.includes(index);
+  item.addEventListener("change", () => {
+    const completed = wishItems
+      .map((wish, wishIndex) => wish.checked ? wishIndex : null)
+      .filter(wishIndex => wishIndex !== null);
+    localStorage.setItem("wishes", JSON.stringify(completed));
+    updateWishlistStatus();
+    if (item.checked) sparkleBurst();
+  });
+});
+
+function updateWishlistStatus() {
+  const completed = wishItems.filter(item => item.checked).length;
+  wishlistStatus.textContent = completed === wishItems.length
+    ? "Minden kívánság teljesítve! Jöhetnek az új közös álmok. ✨"
+    : completed + " / " + wishItems.length + " közös kívánság teljesítve 💗";
+}
+
+updateWishlistStatus();
+
+const scrollProgress = document.getElementById("scrollProgress");
+window.addEventListener("scroll", () => {
+  const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+  const percentage = scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0;
+  scrollProgress.style.width = percentage + "%";
+}, { passive: true });
+
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("visible");
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: .12 });
+
+document.querySelectorAll(".section").forEach(section => {
+  section.classList.add("reveal-on-scroll");
+  revealObserver.observe(section);
+});
+
+document.getElementById("shareBtn").addEventListener("click", async () => {
+  const shareData = {
+    title: "Neked, Szerelmem ♡",
+    text: "Készítettem neked egy kis szeretettel teli oldalt. 💗",
+    url: window.location.href
+  };
+  try {
+    if (navigator.share) {
+      await navigator.share(shareData);
+      showToast("Az oldal megosztása elindult. 💌");
+    } else {
+      await navigator.clipboard.writeText(window.location.href);
+      showToast("Az oldal címe a vágólapra került. 💌");
+    }
+  } catch (error) {
+    showToast("A megosztást most bezártad. 💗");
+  }
+});
+
+document.getElementById("topBtn").addEventListener("click", () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+const volumeSlider = document.getElementById("volumeSlider");
+const volumeValue = document.getElementById("volumeValue");
+volumeSlider.value = String(Math.round(musicVolume * 100));
+volumeValue.textContent = volumeSlider.value + "%";
+volumeSlider.addEventListener("input", () => {
+  const volume = Number(volumeSlider.value) / 100;
+  songAudio.volume = volume;
+  if (masterGain) masterGain.gain.value = volume;
+  volumeValue.textContent = volumeSlider.value + "%";
+  localStorage.setItem("lexi-music-volume", String(volume));
+});
+
+const volumeControl = document.getElementById("volumeControl");
+const volumeToggle = document.getElementById("volumeToggle");
+volumeToggle.addEventListener("click", () => {
+  const isOpen = volumeControl.classList.toggle("open");
+  volumeToggle.setAttribute("aria-expanded", String(isOpen));
+  volumeToggle.setAttribute("aria-label", isOpen ? "Hangerő bezárása" : "Hangerő megnyitása");
+});
+
+document.addEventListener("click", event => {
+  if (!volumeControl.contains(event.target)) {
+    volumeControl.classList.remove("open");
+    volumeToggle.setAttribute("aria-expanded", "false");
+    volumeToggle.setAttribute("aria-label", "Hangerő megnyitása");
+  }
+});
+
+const gameBoard = document.getElementById("gameBoard");
+const gameStatus = document.getElementById("gameStatus");
+const gameSymbols = ["💗", "💞", "💋", "✨"];
+let firstCard = null;
+let secondCard = null;
+let matchedPairs = 0;
+let gameLocked = false;
+
+function shuffleCards(cards) {
+  return cards.sort(() => Math.random() - 0.5);
+}
+
+function createGame() {
+  gameBoard.innerHTML = "";
+  firstCard = null;
+  secondCard = null;
+  matchedPairs = 0;
+  gameLocked = false;
+  gameStatus.textContent = "Párok: 0 / 4";
+
+  shuffleCards([...gameSymbols, ...gameSymbols]).forEach(symbol => {
+    const card = document.createElement("button");
+    card.className = "game-card";
+    card.type = "button";
+    card.textContent = symbol;
+    card.dataset.symbol = symbol;
+    card.setAttribute("aria-label", "Lezárt kártya");
+    card.addEventListener("click", () => revealCard(card));
+    gameBoard.appendChild(card);
+  });
+}
+
+function revealCard(card) {
+  if (gameLocked || card === firstCard || card.classList.contains("matched")) return;
+  card.classList.add("revealed");
+  card.setAttribute("aria-label", card.dataset.symbol);
+
+  if (!firstCard) {
+    firstCard = card;
+    return;
+  }
+
+  secondCard = card;
+  gameLocked = true;
+  if (firstCard.dataset.symbol === secondCard.dataset.symbol) {
+    firstCard.classList.add("matched");
+    secondCard.classList.add("matched");
+    matchedPairs++;
+    gameStatus.textContent = "Párok: " + matchedPairs + " / 4";
+    firstCard = null;
+    secondCard = null;
+    gameLocked = false;
+    sparkleBurst();
+    if (matchedPairs === gameSymbols.length) {
+      gameStatus.textContent = "Minden pár megvan! Te vagy a szívem bajnoka! 🏆💗";
+      heartExplosion();
+    }
+  } else {
+    setTimeout(() => {
+      firstCard.classList.remove("revealed");
+      secondCard.classList.remove("revealed");
+      firstCard.setAttribute("aria-label", "Lezárt kártya");
+      secondCard.setAttribute("aria-label", "Lezárt kártya");
+      firstCard = null;
+      secondCard = null;
+      gameLocked = false;
+    }, 700);
+  }
+}
+
+createGame();
+document.getElementById("gameReset").addEventListener("click", createGame);
+
+const loveLetters = [
+  "Te vagy az a gondolat, amitől a hétköznapok is különlegesebbek lesznek. 💗",
+  "Bárhol is vagy, remélem, érzed, hogy valaki most is nagyon szeret. 🫂",
+  "A kedvenc helyem az, ahol melletted lehetek. ✨",
+  "Nem kell nagy dolog ahhoz, hogy boldog legyek: elég egy üzenet tőled. 💌",
+  "Veled minden közös pillanatból egy új kedvenc emlék születik. 🌷",
+  "Ha ma csak egy dolgot jegyzel meg, ez legyen: csodálatos vagy. 🥹",
+  "A mosolyod az egyik legszebb dolog, amit az élet nekem adott. 😊",
+  "Még a csend is szép, ha veled oszthatom meg. 🤍"
+];
+
+document.getElementById("letterBtn").addEventListener("click", () => {
+  const current = document.getElementById("letterText").textContent;
+  let next = current;
+  while (next === current) next = loveLetters[Math.floor(Math.random() * loveLetters.length)];
+  document.getElementById("letterText").textContent = next;
+  sparkleBurst();
+});
+
+const coupleQuestions = [
+  { question: "Mi az egyik legszebb dolog bennünk?", answer: "Hogy a legegyszerűbb pillanatokat is különlegessé tudjuk tenni együtt. 💗" },
+  { question: "Miért jó melletted lenni?", answer: "Mert melletted nem kell másnak mutatnom magam, egyszerűen csak önmagam lehetek. 🫶" },
+  { question: "Milyen közös emlék vár még ránk?", answer: "Rengeteg nevetés, ölelés, kaland és olyan nap, amire mindig mosolyogva emlékszünk majd. ✨" },
+  { question: "Mi az, amit mindig szeretnék megőrizni?", answer: "A figyelmességedet, a nevetésedet és azt az érzést, hogy egymás mellett otthon vagyunk. 🏡" },
+  { question: "Mi a mi titkos szupererőnk?", answer: "Az, hogy egyetlen kedves szóval is jobbá tudjuk tenni egymás napját. 🌷" }
+];
+let currentQuestion = -1;
+document.getElementById("questionBtn").addEventListener("click", () => {
+  currentQuestion = (currentQuestion + 1) % coupleQuestions.length;
+  document.getElementById("questionText").textContent = coupleQuestions[currentQuestion].question;
+  document.getElementById("answerText").textContent = "Kattints a válasz felfedéséhez. 💌";
+});
+document.getElementById("answerBtn").addEventListener("click", () => {
+  if (currentQuestion < 0) currentQuestion = 0;
+  document.getElementById("questionText").textContent = coupleQuestions[currentQuestion].question;
+  document.getElementById("answerText").textContent = coupleQuestions[currentQuestion].answer;
+  sparkleBurst();
+});
+
+const reactionArea = document.getElementById("reactionArea");
+const reactionHeart = document.getElementById("reactionHeart");
+const reactionStatus = document.getElementById("reactionStatus");
+let reactionHits = 0;
+let reactionRunning = false;
+let reactionTimer;
+let reactionStartedAt;
+
+function moveReactionHeart() {
+  const maxX = Math.max(0, reactionArea.clientWidth - 62);
+  const maxY = Math.max(0, reactionArea.clientHeight - 62);
+  reactionHeart.style.left = Math.random() * maxX + "px";
+  reactionHeart.style.top = Math.random() * maxY + "px";
+}
+
+document.getElementById("reactionStart").addEventListener("click", () => {
+  clearTimeout(reactionTimer);
+  reactionHits = 0;
+  reactionRunning = true;
+  reactionStartedAt = Date.now();
+  reactionHeart.style.display = "block";
+  moveReactionHeart();
+  reactionStatus.textContent = "Kapd el a szívet! 10 másodperced van. 💗";
+  reactionTimer = setTimeout(() => {
+    reactionRunning = false;
+    reactionHeart.style.display = "none";
+    reactionStatus.textContent = "Eredmény: " + reactionHits + " szívdobbanás! 💞";
+    showToast(reactionHits > 5 ? "Nagyon gyors voltál! ⚡" : "A szeretetben nincs vesztes. 💗");
+  }, 10000);
+});
+
+reactionHeart.addEventListener("click", () => {
+  if (!reactionRunning) return;
+  reactionHits++;
+  moveReactionHeart();
+  reactionStatus.textContent = reactionHits + " szívdobbanás • " + Math.max(0, 10 - Math.floor((Date.now() - reactionStartedAt) / 1000)) + " mp";
+  sparkleBurst();
+});
+
+const backupKeys = [
+  "kiss-count",
+  "personal-note",
+  "wishes",
+  "lexi-memories",
+  "lexi-mood-history",
+  "lexi-challenge-date",
+  "lexi-hug-count"
+];
+
+document.getElementById("exportData").addEventListener("click", () => {
+  const backup = {};
+  backupKeys.forEach(key => {
+    const value = localStorage.getItem(key);
+    if (value !== null) backup[key] = value;
+  });
+  backup.exportedAt = new Date().toISOString();
+
+  const file = new Blob([JSON.stringify(backup, null, 2)], { type: "application/json" });
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(file);
+  link.download = "szerelmes-oldal-mentes.json";
+  link.click();
+  URL.revokeObjectURL(link.href);
+  showToast("Az adataidat lementettem egy fájlba. 💾");
+});
+
+document.getElementById("importData").addEventListener("click", () => {
+  document.getElementById("importFile").click();
+});
+
+document.getElementById("importFile").addEventListener("change", event => {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    try {
+      const backup = JSON.parse(reader.result);
+      backupKeys.forEach(key => {
+        if (typeof backup[key] === "string") localStorage.setItem(key, backup[key]);
+      });
+      showToast("Az adatok visszaálltak, az oldal újratöltődik. 💗");
+      setTimeout(() => window.location.reload(), 900);
+    } catch (error) {
+      showToast("Ez nem érvényes mentési fájl. 💔");
+    }
+    event.target.value = "";
+  };
+  reader.readAsText(file);
+});
+
+document.getElementById("musicBtn")
+  .addEventListener("click", toggleMusic);
+</script>
+</body>
+</html>
